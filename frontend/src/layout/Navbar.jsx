@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "#000" }}>
+    <AppBar position="sticky" sx={{ backgroundColor: "#1976d2" }}>
       <Toolbar>
         {/* Website Title */}
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -36,7 +36,7 @@ const Navbar = () => {
             component={NavLink}
             to="/register"
             variant="contained"
-            color="inherit"
+            sx={{ backgroundColor: "#efefef" , color: '#000'}}
           >
             Register
           </Button>

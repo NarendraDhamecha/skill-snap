@@ -7,22 +7,25 @@ import {
   Box,
   Grid2,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setLoginData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = {
-      email,
-      password,
-    };
+
     try {
-      const response = await axiosInstance.post("/login", payload);
+      const response = await axiosInstance.post("/login", loginData);
+      localStorage.setItem("token", response.data.token);
+      // alert(JSON.stringify(response))
       navigate("/create-resume");
     } catch (error) {
       alert(JSON.stringify(error));
@@ -47,8 +50,9 @@ const Login = () => {
             variant="outlined"
             fullWidth
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={loginData?.email}
+            onChange={handleChange}
             sx={{ marginBottom: 2 }}
           />
           <TextField
@@ -57,8 +61,9 @@ const Login = () => {
             variant="outlined"
             fullWidth
             required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={loginData?.password}
+            onChange={handleChange}
             sx={{ marginBottom: 2 }}
           />
           <Button type="submit" variant="contained" color="primary" fullWidth>
@@ -67,9 +72,9 @@ const Login = () => {
 
           <Grid2 container justifyContent="flex-end" sx={{ marginTop: 2 }}>
             <Grid2 item>
-              <Link to="/forgot-password" style={{ textDecoration: "none" }}>
+              <NavLink to="/forgot-password" style={{ textDecoration: "none" }}>
                 <Typography variant="body2">Forgot password?</Typography>
-              </Link>
+              </NavLink>
             </Grid2>
           </Grid2>
         </Box>

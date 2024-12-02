@@ -3,7 +3,6 @@ import axios from 'axios';
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
   baseURL: "http://localhost:8000/skillsnap",  // Replace with your API base URL
-//   timeout: 5000,  // Optional: Set a timeout for requests
   headers: {
     'Content-Type': 'application/json',  // Set default content type
   },
