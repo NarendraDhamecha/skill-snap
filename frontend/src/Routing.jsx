@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { login } from "./redux/authReducer";
 import NonAuthBaseRoute from "./NonAuthBaseRoute";
 import AuthBaseRoute from "./AuthBaseRoute";
+import ResumeList from "./pages/ResumeList";
 
 // authentication function
 const isAuthenticated = () => {
@@ -64,7 +65,7 @@ const Routing = () => {
           </PrivateRoute>
         }
       >
-        <Route path="create-resume" element={<CreateResume />} />
+        <Route path="create-resume" element={<ResumeList />} />
       </Route>
       <Route path="*" element={<h1>Not found</h1>} />
     </Routes>
