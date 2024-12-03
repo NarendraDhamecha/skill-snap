@@ -2,13 +2,13 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "./layout/Navbar";
 
-const BaseRoute = () => {
+const NonAuthBaseRoute = () => {
   return (
-    <div >
-       <Navbar/>
+    <>
+      <Navbar />
       <Outlet />
-    </div>
+    </>
   );
 };
 
-export default BaseRoute;
+export default NonAuthBaseRoute;

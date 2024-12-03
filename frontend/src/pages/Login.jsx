@@ -9,10 +9,13 @@ import {
 } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
+import { login } from "../redux/authReducer";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,9 +27,8 @@ const Login = () => {
 
     try {
       const response = await axiosInstance.post("/login", loginData);
-      localStorage.setItem("token", response.data.token);
-      // alert(JSON.stringify(response))
-      navigate("/create-resume");
+      dispatch(login(response.data));
+      navigate("/skillsnap/auth/create-resume");
     } catch (error) {
       alert(JSON.stringify(error));
     }
@@ -72,7 +74,7 @@ const Login = () => {
 
           <Grid2 container justifyContent="flex-end" sx={{ marginTop: 2 }}>
             <Grid2 item>
-              <NavLink to="/forgot-password" style={{ textDecoration: "none" }}>
+              <NavLink to="/skillsnap/forgot-password" style={{ textDecoration: "none" }}>
                 <Typography variant="body2">Forgot password?</Typography>
               </NavLink>
             </Grid2>

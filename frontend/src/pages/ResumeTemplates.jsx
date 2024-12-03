@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button, Grid, Box, CardMedia } from '@mui/material';
+import { Card, CardContent, Typography, Button, Grid, Box, CardMedia, Grid2 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const templates = [
@@ -8,28 +8,28 @@ const templates = [
     title: 'Professional Resume',
     description: 'A modern resume layout suitable for job professionals.',
     image: 'https://via.placeholder.com/150',
-    link: '/create-resume',
+    link: '/skillsnap/auth/create-resume',
   },
   {
     id: 2,
     title: 'Creative Resume',
     description: 'A unique resume design for creative fields like design and marketing.',
     image: 'https://via.placeholder.com/150',
-    link: '/create-resume',
+    link: '/skillsnap/auth/create-resume',
   },
   {
     id: 3,
     title: 'Simple Resume',
     description: 'A minimalistic design for those who prefer simplicity.',
     image: 'https://via.placeholder.com/150',
-    link: '/create-resume',
+    link: '/skillsnap/auth/create-resume',
   },
   {
     id: 4,
     title: 'Student Resume',
     description: 'Perfect for students or fresh graduates looking for their first job.',
     image: 'https://via.placeholder.com/150',
-    link: '/create-resume',
+    link: '/skillsnap/auth/create-resume',
   },
 ];
 
@@ -47,9 +47,9 @@ const ResumeTemplates = () => {
       </Box>
 
       {/* Template Cards */}
-      <Grid container spacing={4} justifyContent="center">
+      <Grid2 container spacing={4} justifyContent="center">
         {templates.map((template) => (
-          <Grid item xs={12} sm={6} md={3} key={template.id}>
+          <Grid2 item xs={12} sm={6} md={3} key={template.id}>
             <Card sx={{ maxWidth: 345, boxShadow: 3 }}>
               <CardMedia
                 component="img"
@@ -77,9 +77,9 @@ const ResumeTemplates = () => {
                 </Button>
               </Box>
             </Card>
-          </Grid>
+          </Grid2>
         ))}
-      </Grid>
+      </Grid2>
     </Box>
   );
 };

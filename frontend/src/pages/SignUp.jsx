@@ -27,7 +27,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post("/register", signUpData);
-      navigate("/login");
+      navigate("/skillsnap/login");
     } catch (error) {
       alert(JSON.stringify(error));
     }
@@ -84,7 +84,7 @@ const SignUp = () => {
 
           <Grid2 container justifyContent="flex-end" sx={{ marginTop: 2 }}>
             <Grid2 item>
-              <NavLink to="/login" style={{ textDecoration: "none" }}>
+              <NavLink to="/skillsnap/login" style={{ textDecoration: "none" }}>
                 <Typography variant="body2">
                   Already have an account? Sign In
                 </Typography>

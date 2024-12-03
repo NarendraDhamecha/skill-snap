@@ -3,7 +3,7 @@ import {
   Button,
   Typography,
   Container,
-  Grid,
+  Grid2,
   Box,
   Card,
   CardContent,
@@ -29,7 +29,7 @@ const Home = () => {
         <Box sx={{ marginTop: 3 }}>
           <Button
             component={Link}
-            to="/resume-templates"
+            to="/skillsnap/resume-templates"
             variant="contained"
             color="primary"
             sx={{ marginRight: 2 }}
@@ -38,7 +38,7 @@ const Home = () => {
           </Button>
           <Button
             component={Link}
-            to="/create-resume"
+            to="/skillsnap/auth/create-resume"
             variant="outlined"
             color="primary"
           >
@@ -48,8 +48,8 @@ const Home = () => {
       </Box>
 
       {/* Features Section */}
-      <Grid container spacing={4} justifyContent="center">
-        <Grid item xs={12} sm={6} md={4}>
+      <Grid2 container spacing={4} justifyContent="center">
+        <Grid2 item xs={12} sm={6} md={4}>
           <Card elevation={3}>
             <CardContent>
               <Typography
@@ -69,8 +69,8 @@ const Home = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={4}>
           <Card elevation={3}>
             <CardContent>
               <Typography
@@ -90,8 +90,8 @@ const Home = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        </Grid2>
+        <Grid2 item xs={12} sm={6} md={4}>
           <Card elevation={3}>
             <CardContent>
               <Typography
@@ -110,8 +110,8 @@ const Home = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* Call to Action Section */}
       <Box sx={{ textAlign: "center", marginTop: 6 }}>
@@ -124,7 +124,7 @@ const Home = () => {
         </Typography>
         <Button
           component={Link}
-          to="/create-resume"
+          to="/skillsnap/auth/create-resume"
           variant="contained"
           color="primary"
           sx={{ marginTop: 3 }}
@@ -134,7 +134,7 @@ const Home = () => {
       </Box>
 
       {/* Footer Section */}
-      <Box sx={{ textAlign: "center", marginTop: 6, paddingBottom: 4 }}>
+      {/* <Box sx={{ textAlign: "center", marginTop: 6, paddingBottom: 4 }}>
         <Typography variant="body2" color="text.secondary">
           &copy; 2024 Snap Skill. All rights reserved.
         </Typography>
@@ -152,7 +152,7 @@ const Home = () => {
             Terms of Service
           </Link>
         </Box>
-      </Box>
+      </Box> */}
     </Container>
   );
 };

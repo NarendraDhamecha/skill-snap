@@ -6,6 +6,7 @@ import {
   Container,
   Box,
   Grid,
+  Grid2,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -44,15 +45,15 @@ const ForgotPassword = () => {
             Reset Password
           </Button>
 
-          <Grid container justifyContent="flex-end" sx={{ marginTop: 2 }}>
-            <Grid item>
-              <Link to="/login" style={{ textDecoration: "none" }}>
+          <Grid2 container justifyContent="flex-end" sx={{ marginTop: 2 }}>
+            <Grid2 item>
+              <Link to="/skillsnap/login" style={{ textDecoration: "none" }}>
                 <Typography variant="body2">
                   Remembered your password? Sign In
                 </Typography>
               </Link>
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </Box>
       </Box>
     </Container>

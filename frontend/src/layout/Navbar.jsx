@@ -1,8 +1,17 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/authReducer";
 
 const Navbar = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "#1976d2" }}>
       <Toolbar>
@@ -13,33 +22,41 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button color="inherit" component={NavLink} to="/home">
+          <Button color="inherit" component={NavLink} to="/skillsnap/home">
             Home
           </Button>
 
-          <Button component={NavLink} color="inherit" to="/resume-templates">
+          <Button component={NavLink} color="inherit" to="/skillsnap/resume-templates">
             Resume Templates
           </Button>
         </Box>
 
-        {/* Login and Register Buttons */}
+        {/* Conditional Buttons */}
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            component={NavLink}
-            to="/login"
-            variant="outlined"
-            color="inherit"
-          >
-            Login
-          </Button>
-          <Button
-            component={NavLink}
-            to="/register"
-            variant="contained"
-            sx={{ backgroundColor: "#efefef" , color: '#000'}}
-          >
-            Register
-          </Button>
+          {isLoggedIn ? (
+            <Button variant="outlined" color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Button
+                component={NavLink}
+                to="/skillsnap/login"
+                variant="outlined"
+                color="inherit"
+              >
+                Login
+              </Button>
+              <Button
+                component={NavLink}
+                to="/skillsnap/register"
+                variant="contained"
+                sx={{ backgroundColor: "#efefef", color: "#000" }}
+              >
+                Register
+              </Button>
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>
