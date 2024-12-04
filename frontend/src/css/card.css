@@ -1,0 +1,25 @@
+.snapskill-card {
+  background: #262626;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+  height: 380px;
+}
+
+.snapskill-card-parent {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 15%;
+}
+
+.snapskill-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.snapskill-icon-clr {
+  --tw-text-opacity: 1;
+  color: rgb(245 245 245 / var(--tw-text-opacity));
+}

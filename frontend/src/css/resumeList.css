@@ -1,0 +1,21 @@
+.snapskill-resume-list-container {
+  --tw-bg-opacity: 1;
+  background-color: rgb(23 23 23 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(245 245 245 / var(--tw-text-opacity));
+  padding: 30px;
+  height: 100vh;
+}
+
+.snapskill-resume-list {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.snapskill-resume-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
