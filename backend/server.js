@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./_db");
 const authRoutes = require("./routes/authRoutes");
+const resumeRoutes = require("./routes/resumeRoutes");
 const ensureAuth = require("./middleware/ensureAuth");
 
 const PORT = process.env.PORT || 8000;
@@ -25,9 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/skillsnap", authRoutes);
 
-app.get("/skillsnap/getData", ensureAuth, (req, res) => {
-  res.json([1, 2, 3, 4, 5]);
-});
+app.use("/skillsnap", ensureAuth, resumeRoutes);
 
 connectDB()
   .then(() => {
