@@ -3,12 +3,12 @@ import AddIcon from "@mui/icons-material/Add";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "../css/card.css";
 
-const Card = ({ isCreate, title }) => {
+const Card = ({ isCreate, title, callback}) => {
   return (
     <div className="snapskill-card-parent">
       <div className="snapskill-card">
         {isCreate && (
-          <IconButton size="large">
+          <IconButton size="large" onClick={callback}>
             <AddIcon className="snapskill-icon-clr" fontSize="inherit" />
           </IconButton>
         )}
