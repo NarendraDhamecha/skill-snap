@@ -12,6 +12,7 @@ import { login } from "./redux/authReducer";
 import NonAuthBaseRoute from "./NonAuthBaseRoute";
 import AuthBaseRoute from "./AuthBaseRoute";
 import ResumeList from "./pages/ResumeList";
+import axiosInstance from "./api/axiosInstance";
 
 // authentication function
 const isAuthenticated = () => {
@@ -35,9 +36,20 @@ const NonPrivateRoute = ({ children }) => {
 const Routing = () => {
   const dispatch = useDispatch();
 
+  const verifyToken = async () => {
+    if (isAuthenticated()) {
+      try {
+        await axiosInstance.get("/verify-user");
+        dispatch(login({ token: localStorage.getItem("token") }));
+      } catch (error) {
+        localStorage.removeItem("token");
+      }
+    }
+  };
+
   useEffect(() => {
     if (isAuthenticated()) {
-      dispatch(login({ token: localStorage.getItem("token") }));
+      verifyToken();
     }
   }, []);
 
