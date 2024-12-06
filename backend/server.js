@@ -20,8 +20,8 @@ app.use(
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("hey server is running");
+app.get("/verify-user", ensureAuth, (req, res) => {
+  res.json({ msg: "User is authenticated" });
 });
 
 app.use("/skillsnap", authRoutes);
