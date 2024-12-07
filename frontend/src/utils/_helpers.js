@@ -1,8 +1,7 @@
-// export const isLoggedIn = () => {
-//   const token = localStorage.getItem("token");
-//   if (token) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// };
+export const generateUniqueSlug = (input = "") => {
+  return input
+    .toLowerCase() // Convert the string to lowercase
+    .trim() // Remove whitespace from both ends of the string
+    .replace(/\s+/g, "-") // Replace spaces with hyphens
+    .replace(/[^a-z0-9-]/g, ""); // Remove non-alphanumeric characters except hyphens
+};

@@ -137,54 +137,77 @@
 // };
 
 // export default Home;
+
 import React from "react";
+import { Card, Button } from "flowbite-react";
 import { NavLink } from "react-router-dom";
-import "../css/home.css";
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Header Section */}
-      <div className="header-section">
-        <h1 className="header-title">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-blue-600">
           Create Stunning Resumes with Snap Skill
         </h1>
-        <p className="header-description">
+        <p className="text-lg text-gray-500 mt-4">
           Build professional resumes in minutes using our easy-to-use templates
           and tools.
         </p>
-        <div className="header-buttons">
-          <NavLink to="/skillsnap/resume-templates">View Templates</NavLink>
-          <NavLink to="/skillsnap/auth/create-resume">Create a Resume</NavLink>
+        <div className="mt-6">
+          <Button
+            href="/skillsnap/resume-templates"
+            className="mr-3"
+            gradientDuoTone="cyanToBlue"
+          >
+            View Templates
+          </Button>
+          <Button
+            href="/skillsnap/auth/create-resume"
+            outline={true}
+            gradientDuoTone="cyanToBlue"
+          >
+            Create a Resume
+          </Button>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="features-section">
-        <div className="feature-card">
-          <h2>Easy to Use</h2>
-          <p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card>
+          <h2 className="text-xl font-bold">Easy to Use</h2>
+          <p className="text-sm text-gray-600 mt-2">
             Our platform is designed to make resume creation quick and easy for
             everyone.
           </p>
-        </div>
-        <div className="feature-card">
-          <h2>Professional Templates</h2>
-          <p>
+        </Card>
+        <Card>
+          <h2 className="text-xl font-bold">Professional Templates</h2>
+          <p className="text-sm text-gray-600 mt-2">
             Choose from a wide variety of customizable templates that suit your
             career.
           </p>
-        </div>
-        <div className="feature-card">
-          <h2>Instant Download</h2>
-          <p>Once you’re done, download your resume instantly in PDF format.</p>
-        </div>
+        </Card>
+        <Card>
+          <h2 className="text-xl font-bold">Instant Download</h2>
+          <p className="text-sm text-gray-600 mt-2">
+            Once you’re done, download your resume instantly in PDF format.
+          </p>
+        </Card>
       </div>
 
       {/* Call to Action Section */}
-      <div className="call-to-action">
-        <h2>Ready to create your dream resume?</h2>
-        <NavLink to="/skillsnap/auth/create-resume">Start Creating</NavLink>
+      <div className="text-center mt-12">
+        <h2 className="text-3xl font-bold text-blue-600">
+          Ready to create your dream resume?
+        </h2>
+        <Button
+          href="/skillsnap/auth/create-resume"
+          gradientDuoTone="cyanToBlue"
+          className="mt-4"
+        >
+          Start Creating
+        </Button>
       </div>
     </div>
   );

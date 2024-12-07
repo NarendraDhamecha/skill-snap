@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Card, Label, TextInput, Button } from "flowbite-react";
 import axiosInstance from "../api/axiosInstance";
-import Input from "../UI/Input";
-import Button from "../UI/Button";
 
 const SignUp = () => {
   const [signUpData, setSignUpData] = useState({
@@ -28,94 +27,61 @@ const SignUp = () => {
   };
 
   return (
-    // <Container component="main" maxWidth="xs">
-    //   <Box
-    //     sx={{
-    //       display: "flex",
-    //       flexDirection: "column",
-    //       alignItems: "center",
-    //       marginTop: 8,
-    //     }}
-    //   >
-    //     <Typography variant="h5">Sign Up for Snap Skill</Typography>
-
-    //     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-    //       <TextField
-    //         label="Full Name"
-    //         variant="outlined"
-    //         fullWidth
-    //         required
-    //         name="name"
-    //         value={signUpData?.name}
-    //         onChange={handleChange}
-    //         sx={{ marginBottom: 2 }}
-    //       />
-    //       <TextField
-    //         label="Email Address"
-    //         variant="outlined"
-    //         fullWidth
-    //         required
-    //         name="email"
-    //         value={signUpData?.email}
-    //         onChange={handleChange}
-    //         sx={{ marginBottom: 2 }}
-    //       />
-    //       <TextField
-    //         label="Password"
-    //         type="password"
-    //         variant="outlined"
-    //         fullWidth
-    //         required
-    //         name="password"
-    //         value={signUpData?.password}
-    //         onChange={handleChange}
-    //         sx={{ marginBottom: 2 }}
-    //       />
-
-    //       <Button type="submit" variant="contained" color="primary" fullWidth>
-    //         Sign Up
-    //       </Button>
-
-    //       <Grid2 container justifyContent="flex-end" sx={{ marginTop: 2 }}>
-    //         <Grid2 item>
-    //           <NavLink to="/skillsnap/login" style={{ textDecoration: "none" }}>
-    //             <Typography variant="body2">
-    //               Already have an account? Sign In
-    //             </Typography>
-    //           </NavLink>
-    //         </Grid2>
-    //       </Grid2>
-    //     </Box>
-    //   </Box>
-    // </Container>
-    <div>
-      <h5>Sign Up for Snap Skill</h5>
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="Full Name"
-          name="name"
-          value={signUpData.name}
-          onChange={handleChange}
-          placeholder="Full Name"
-        />
-        <Input
-          label="Email Address"
-          type="email"
-          name="email"
-          value={signUpData.email}
-          onChange={handleChange}
-          placeholder="Email Address"
-        />
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          value={signUpData.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />
-        <Button type="submit" content="Sign Up" />
-      </form>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <Card className="w-full max-w-md p-4">
+        <h2 className="text-xl font-bold text-center mb-4">
+          Sign Up for Snap Skill
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Label htmlFor="name" value="Full Name" />
+            <TextInput
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Enter your full name"
+              required
+              value={signUpData.name}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="email" value="Email Address" />
+            <TextInput
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              value={signUpData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="password" value="Password" />
+            <TextInput
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+              value={signUpData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <Button type="submit" className="w-full" gradientDuoTone="cyanToBlue">
+            Sign Up
+          </Button>
+          <div className="text-right">
+            <NavLink
+              to="/skillsnap/login"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Already have an account? Sign In
+            </NavLink>
+          </div>
+        </form>
+      </Card>
     </div>
   );
 };

@@ -3,9 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { login } from "../redux/authReducer";
 import { useDispatch } from "react-redux";
-import "../css/login.css";
-import Input from "../UI/Input";
-import Button from "../UI/Button";
+import { Card, Button, Label, TextInput, Checkbox } from "flowbite-react";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -30,74 +28,49 @@ const Login = () => {
   };
 
   return (
-    // <Container component="main" maxWidth="xs">
-    //   <Box
-    //     sx={{
-    //       display: "flex",
-    //       flexDirection: "column",
-    //       alignItems: "center",
-    //       marginTop: 8,
-    //     }}
-    //   >
-    //     <Typography variant="h5">Sign In to Snap Skill</Typography>
-
-    //     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-    //       <TextField
-    //         label="Email Address"
-    //         variant="outlined"
-    //         fullWidth
-    //         required
-    //         name="email"
-    //         value={loginData?.email}
-    //         onChange={handleChange}
-    //         sx={{ marginBottom: 2 }}
-    //       />
-    //       <TextField
-    //         label="Password"
-    //         type="password"
-    //         variant="outlined"
-    //         fullWidth
-    //         required
-    //         name="password"
-    //         value={loginData?.password}
-    //         onChange={handleChange}
-    //         sx={{ marginBottom: 2 }}
-    //       />
-    //       <Button type="submit" variant="contained" color="primary" fullWidth>
-    //         Log In
-    //       </Button>
-
-    //       <Grid2 container justifyContent="flex-end" sx={{ marginTop: 2 }}>
-    //         <Grid2 item>
-    //           <NavLink to="/skillsnap/forgot-password" style={{ textDecoration: "none" }}>
-    //             <Typography variant="body2">Forgot password?</Typography>
-    //           </NavLink>
-    //         </Grid2>
-    //       </Grid2>
-    //     </Box>
-    //   </Box>
-    // </Container>
-    <div>
-      <h5>Sign In to Snap Skill</h5>
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="Email Address"
-          type="email"
-          name="email"
-          value={loginData?.email}
-          onChange={handleChange}
-          placeholder="Email Address"
-        />
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          value={loginData?.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />
-        <Button type="submit" content="" />
-      </form>
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <Card className="w-full max-w-md p-4">
+        <h2 className="text-xl font-bold text-center mb-4">
+          Sign In to Snap Skill
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <Label htmlFor="email" value="Email Address" />
+            <TextInput
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              required
+              value={loginData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="password" value="Password" />
+            <TextInput
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+              value={loginData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <Button type="submit" className="w-full" gradientDuoTone="cyanToBlue">
+            Log In
+          </Button>
+          <div className="text-right">
+            <NavLink
+              to="/skillsnap/forgot-password"
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Forgot password?
+            </NavLink>
+          </div>
+        </form>
+      </Card>
     </div>
   );
 };
