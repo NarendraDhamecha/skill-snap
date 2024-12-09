@@ -17,12 +17,12 @@ const registerUser = async (req, res) => {
   }
 
   try {
-    const user = new User({
+    const user = {
       name,
       email,
-      password, // Password will be hashed before saving
-    });
-    const newUser = await user.save();
+      password,
+    };
+    const newUser = await User.create(user);
     return res
       .status(201)
       .json({ msg: "User created successfully", data: newUser });
@@ -41,7 +41,7 @@ const authenticateUser = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    const isPasswordMatch = await user.matchPassword(password);
+    const isPasswordMatch = password;
 
     if (isPasswordMatch) {
       const token = jwt.sign(

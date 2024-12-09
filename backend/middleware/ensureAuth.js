@@ -23,7 +23,7 @@ const ensureAuth = async (req, res, next) => {
       decodedData = decoded;
     });
 
-    const user = await User.findById(decodedData.id);
+    const user = await User.findByPk(decodedData.id);
     req.user = user;
     next();
   } catch (error) {

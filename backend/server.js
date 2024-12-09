@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
-const connectDB = require("./_db");
+const sequelize = require("./_db");
 const authRoutes = require("./routes/authRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
 const ensureAuth = require("./middleware/ensureAuth");
+const { User, Resume } = require("./models/index");
 
 const PORT = process.env.PORT || 8000;
 
@@ -28,11 +29,11 @@ app.use("/skillsnap", authRoutes);
 
 app.use("/skillsnap", ensureAuth, resumeRoutes);
 
-connectDB()
+sequelize
+  .sync({ alter: true }) // Use `alter: true` to adjust the table structure without losing data
   .then(() => {
-    console.log("Database connected successfully");
     app.listen(PORT, () => {
       console.log(`server in running on ${PORT}`);
     });
   })
-  .catch((error) => console.log("Database connection failed", error));
+  .catch((error) => console.log("Error syncing database", error));

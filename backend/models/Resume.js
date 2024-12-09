@@ -1,35 +1,27 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../_db");
 
-const resumeSchema = new mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User schema
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    slug: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    sections: [
-      {
-        title: {
-          type: String,
-        },
-        content: {
-          type: Object,
-        },
-      },
-    ],
+const Resume = sequelize.define("Resume", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
   },
-  { timestamps: true }
-);
 
-const Resume = mongoose.model("Resume", resumeSchema);
-module.exports = Resume;
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+
+  sections: {
+    type: DataTypes.JSON,
+  },
+});
+
+module.exports = Resume
