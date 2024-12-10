@@ -22,7 +22,7 @@ app.use(
 app.use(express.json());
 
 app.get("/skillsnap/verify-user", ensureAuth, (req, res) => {
-  res.json({ msg: "User is authenticated" });
+  res.json({ msg: "User is authenticated", user: req.user });
 });
 
 app.use("/skillsnap", authRoutes);

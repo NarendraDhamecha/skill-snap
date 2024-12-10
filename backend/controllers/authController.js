@@ -52,7 +52,7 @@ const authenticateUser = async (req, res) => {
         { expiresIn: "1h" }
       );
 
-      return res.json({ msg: "Authentication successful", token });
+      return res.json({ msg: "Authentication successful", token, user});
     } else {
       return res.status(401).json({ msg: "Invalid password" });
     }
