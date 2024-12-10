@@ -5,7 +5,7 @@ import ResumeTemplates from "./pages/ResumeTemplates";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
-import CreateResume from "./pages/CreateResume";
+// import CreateResume from "./pages/CreateResume";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { login } from "./redux/authReducer";
@@ -39,8 +39,13 @@ const Routing = () => {
   const verifyToken = async () => {
     if (isAuthenticated()) {
       try {
-        await axiosInstance.get("/verify-user");
-        dispatch(login({ token: localStorage.getItem("token") }));
+        const response = await axiosInstance.get("/verify-user");
+        dispatch(
+          login({
+            token: localStorage.getItem("token"),
+            user: response.data.user,
+          })
+        );
       } catch (error) {
         localStorage.removeItem("token");
       }

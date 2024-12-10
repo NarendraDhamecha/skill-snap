@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 import { login } from "../redux/authReducer";
 import { useDispatch } from "react-redux";
-import { Card, Button, Label, TextInput, Checkbox } from "flowbite-react";
+import { Card, Button, Label, TextInput } from "flowbite-react";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-md p-4">
         <h2 className="text-xl font-bold text-center mb-4">
           Sign In to Snap Skill

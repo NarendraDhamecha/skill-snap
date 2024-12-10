@@ -27,7 +27,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-md p-4">
         <h2 className="text-xl font-bold text-center mb-4">
           Sign Up for Snap Skill

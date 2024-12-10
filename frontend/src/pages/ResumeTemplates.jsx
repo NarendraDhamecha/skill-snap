@@ -31,6 +31,13 @@ const templates = [
     image: "https://via.placeholder.com/150",
     NavLink: "/skillsnap/auth/create-resume",
   },
+  {
+    id: 5,
+    title: "Student Resume",
+    description: "Perfect for students or fresh graduates looking for their first job.",
+    image: "https://via.placeholder.com/150",
+    NavLink: "/skillsnap/auth/create-resume",
+  },
 ];
 
 const ResumeTemplates = () => {
@@ -39,7 +46,7 @@ const ResumeTemplates = () => {
       {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-blue-600">Browse Resume Templates</h1>
-        <p className="text-lg text-gray-600 mt-4">
+        <p className="text-lg text-gray-600 my-4">
           Select a template to start creating your resume.
         </p>
       </div>
@@ -54,11 +61,12 @@ const ResumeTemplates = () => {
             className="shadow-lg"
           >
             <h5 className="text-xl font-bold">{template.title}</h5>
-            <p className="text-gray-600 mt-2">{template.description}</p>
+            <p className="text-gray-600">{template.description}</p>
             <Button
-              href={template.NavLink}
+              to={template.NavLink}
+              as={NavLink}
               gradientDuoTone="cyanToBlue"
-              className="mt-4 w-full"
+              className="w-full"
             >
               Start Creating
             </Button>
