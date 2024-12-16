@@ -30,7 +30,7 @@ app.use("/skillsnap", authRoutes);
 app.use("/skillsnap", ensureAuth, resumeRoutes);
 
 sequelize
-  .sync() // Use `alter: true` to adjust the table structure without losing data
+  .sync()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`server in running on ${PORT}`);
