@@ -5,19 +5,29 @@ import "../css/resumeList.css";
 import { IoMdAdd } from "react-icons/io";
 import CreateNewResumeModal from "../components/CreateNewResumeModal";
 import { Card } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
+import { removeSpaces } from "../utils/_helpers";
 
 const DUMMY_DATA = [
-  { id: 2, isCreate: false, title: "narendra1" },
-  { id: 3, isCreate: false, title: "narendra2" },
-  { id: 4, isCreate: false, title: "narendra3" },
-  { id: 5, isCreate: false, title: "narendra4" },
+  { id: 2, isCreate: false, title: "narendra1", slug: "narendra1" },
+  { id: 3, isCreate: false, title: "narendra2" , slug: "narendra2" },
+  { id: 4, isCreate: false, title: "narendra3", slug: "narendra3" },
+  { id: 5, isCreate: false, title: "narendra4", slug: "narendra4"},
 ];
 
 const ResumeList = () => {
   const [isCreateNew, setCreateNew] = useState(false);
+  const navigate = useNavigate();
 
   const handleCreateNewResume = () => {
     setCreateNew((prev) => !prev);
+  };
+
+  const handleResumeClick = (resume) => {
+    const resumeTitle = removeSpaces(resume?.title);
+    const resumeId = resume?.id;
+    const path = `/${resumeTitle}${resumeId}/${resume?.slug}/build`;
+    navigate(path);
   };
 
   return (
@@ -42,9 +52,10 @@ const ResumeList = () => {
         {DUMMY_DATA.map((resume) => (
           <Card
             key={resume.id}
-            className="max-w-sm"
+            className="max-w-sm cursor-pointer"
             imgAlt="Meaningful alt text for an image that is not purely decorative"
             imgSrc="https://picsum.photos/280/"
+            onClick={() => handleResumeClick(resume)}
           >
             <h6 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {resume.title}

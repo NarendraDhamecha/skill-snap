@@ -10,9 +10,10 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { login } from "./redux/authReducer";
 import NonAuthBaseRoute from "./NonAuthBaseRoute";
-import AuthBaseRoute from "./AuthBaseRoute";
+// import AuthBaseRoute from "./AuthBaseRoute";
 import ResumeList from "./pages/ResumeList";
 import axiosInstance from "./api/axiosInstance";
+import CreateResume from "./pages/CreateResume";
 
 // authentication function
 const isAuthenticated = () => {
@@ -21,13 +22,13 @@ const isAuthenticated = () => {
 
 // Private Route Component
 const PrivateRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/skillsnap/login" />;
+  return isAuthenticated() ? children : <Navigate to="/login" />;
 };
 
 //Non Private Route Component
 const NonPrivateRoute = ({ children }) => {
   return isAuthenticated() ? (
-    <Navigate to="/skillsnap/auth/create-resume" />
+    <Navigate to="/dashboard" />
   ) : (
     children
   );
@@ -61,7 +62,7 @@ const Routing = () => {
   return (
     <Routes>
       <Route
-        path="/skillsnap"
+        path="/"
         element={
           <NonPrivateRoute>
             <NonAuthBaseRoute />
@@ -74,7 +75,9 @@ const Routing = () => {
         <Route path="home" element={<Home />} />
         <Route path="resume-templates" element={<ResumeTemplates />} />
       </Route>
-      <Route
+      <Route path="/:username/:slug/build" element={<CreateResume />} />
+      <Route path="/dashboard" element={<ResumeList />} />
+      {/* <Route
         path="/skillsnap/auth"
         element={
           <PrivateRoute>
@@ -83,7 +86,7 @@ const Routing = () => {
         }
       >
         <Route path="create-resume" element={<ResumeList />} />
-      </Route>
+      </Route> */}
       <Route path="*" element={<h1>Not found</h1>} />
     </Routes>
   );

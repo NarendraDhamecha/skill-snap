@@ -13,23 +13,23 @@ const CustomNavbar = () => {
           outline
           as={NavLink}
           gradientDuoTone="cyanToBlue"
-          to="/skillsnap/login"
+          to="/login"
         >
           Login
         </Button>
         <Button
           as={NavLink}
-          to="/skillsnap/register"
+          to="/register"
           gradientDuoTone="cyanToBlue"
         >
           Register
         </Button>
       </div>
       <Navbar.Collapse>
-        <Navbar.Link as={NavLink} to="/skillsnap/home">
+        <Navbar.Link as={NavLink} to="/home">
           Home
         </Navbar.Link>
-        <Navbar.Link as={NavLink} to="/skillsnap/resume-templates">
+        <Navbar.Link as={NavLink} to="/resume-templates">
           Resume Templates
         </Navbar.Link>
       </Navbar.Collapse>

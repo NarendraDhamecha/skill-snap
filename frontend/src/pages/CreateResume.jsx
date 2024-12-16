@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import axiosInstance from "../api/axiosInstance";
+import LeftBar from "../components/LeftBar";
+import RightBar from "../components/RightBar";
 
 const CreateResume = () => {
   useEffect(() => {
@@ -8,8 +10,14 @@ const CreateResume = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   }, []);
-  
-  return <h1>Create resume</h1>;
+
+  return (
+    <div className="flex justify-between">
+      <LeftBar />
+      <div>Middle</div>
+      <RightBar />
+    </div>
+  );
 };
 
 export default CreateResume;

@@ -21,7 +21,7 @@ const Login = () => {
     try {
       const response = await axiosInstance.post("/login", loginData);
       dispatch(login(response.data));
-      navigate("/skillsnap/auth/create-resume");
+      navigate("/dashboard");
     } catch (error) {
       alert(JSON.stringify(error));
     }

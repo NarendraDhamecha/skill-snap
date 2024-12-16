@@ -20,7 +20,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await axiosInstance.post("/register", signUpData);
-      navigate("/skillsnap/login");
+      navigate("/login");
     } catch (error) {
       alert(JSON.stringify(error));
     }

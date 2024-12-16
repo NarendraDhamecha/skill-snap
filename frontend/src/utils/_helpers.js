@@ -5,3 +5,7 @@ export const generateUniqueSlug = (input = "") => {
     .replace(/\s+/g, "-") // Replace spaces with hyphens
     .replace(/[^a-z0-9-]/g, ""); // Remove non-alphanumeric characters except hyphens
 };
+
+export const removeSpaces = (input = "") => {
+  return input?.trim()?.replace(/\s+/g, " ");
+};
