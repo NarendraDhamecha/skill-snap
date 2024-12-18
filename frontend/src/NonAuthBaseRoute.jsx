@@ -4,10 +4,10 @@ import Navbar from "./layout/Navbar";
 
 const NonAuthBaseRoute = () => {
   return (
-    <>
+    <div className="h-screen">
       <Navbar />
       <Outlet />
-    </>
+    </div>
   );
 };
 

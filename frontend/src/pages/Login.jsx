@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center" style={{ height: "75%" }}>
       <Card className="w-full max-w-md p-4">
         <h2 className="text-xl font-bold text-center mb-4">
           Sign In to Snap Skill
