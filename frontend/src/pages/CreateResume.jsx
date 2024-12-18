@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axiosInstance from "../api/axiosInstance";
 import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
+import ResumeMiddle from "../components/ResumeMiddle";
 
 const CreateResume = () => {
   useEffect(() => {
@@ -12,9 +13,9 @@ const CreateResume = () => {
   }, []);
 
   return (
-    <div className="flex justify-between">
+    <div className="flex h-screen">
       <LeftBar />
-      <div>Middle</div>
+      <ResumeMiddle />
       <RightBar />
     </div>
   );
