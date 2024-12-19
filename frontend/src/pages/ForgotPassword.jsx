@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Button, TextInput, Label } from "flowbite-react";
+import axiosInstance from "../api/axiosInstance";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle password reset logic here
-    console.log("Password reset for:", email);
+    try {
+      const response = await axiosInstance.post("/forgot-password", { email });
+      toast.success(response.data.message);
+      setEmail("");
+      navigate("/login");
+    } catch (error) {
+      toast.error(JSON.stringify(error));
+    }
   };
 
   return (

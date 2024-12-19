@@ -74,7 +74,7 @@ const SignUp = () => {
           </Button>
           <div className="text-right">
             <NavLink
-              to="/skillsnap/login"
+              to="/login"
               className="text-sm text-blue-600 hover:underline"
             >
               Already have an account? Sign In

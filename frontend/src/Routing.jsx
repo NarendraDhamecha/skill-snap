@@ -14,6 +14,7 @@ import NonAuthBaseRoute from "./NonAuthBaseRoute";
 import ResumeList from "./pages/ResumeList";
 import axiosInstance from "./api/axiosInstance";
 import CreateResume from "./pages/CreateResume";
+import ResetPassword from "./pages/ResetPassword";
 
 // authentication function
 const isAuthenticated = () => {
@@ -27,11 +28,7 @@ const PrivateRoute = ({ children }) => {
 
 //Non Private Route Component
 const NonPrivateRoute = ({ children }) => {
-  return isAuthenticated() ? (
-    <Navigate to="/dashboard" />
-  ) : (
-    children
-  );
+  return isAuthenticated() ? <Navigate to="/dashboard" /> : children;
 };
 
 const Routing = () => {
@@ -77,6 +74,7 @@ const Routing = () => {
       </Route>
       <Route path="/:username/:slug/build" element={<CreateResume />} />
       <Route path="/dashboard" element={<ResumeList />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
       {/* <Route
         path="/skillsnap/auth"
         element={

@@ -63,7 +63,7 @@ const Login = () => {
           </Button>
           <div className="text-right">
             <NavLink
-              to="/skillsnap/forgot-password"
+              to="/forgot-password"
               className="text-sm text-blue-600 hover:underline"
             >
               Forgot password?

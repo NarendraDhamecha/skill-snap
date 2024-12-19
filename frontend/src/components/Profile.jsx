@@ -11,7 +11,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/skillsnap/login");
+    navigate("/login");
   };
 
   return (

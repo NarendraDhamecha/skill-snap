@@ -10,9 +10,9 @@ import { removeSpaces } from "../utils/_helpers";
 
 const DUMMY_DATA = [
   { id: 2, isCreate: false, title: "narendra1", slug: "narendra1" },
-  { id: 3, isCreate: false, title: "narendra2" , slug: "narendra2" },
+  { id: 3, isCreate: false, title: "narendra2", slug: "narendra2" },
   { id: 4, isCreate: false, title: "narendra3", slug: "narendra3" },
-  { id: 5, isCreate: false, title: "narendra4", slug: "narendra4"},
+  { id: 5, isCreate: false, title: "narendra4", slug: "narendra4" },
 ];
 
 const ResumeList = () => {
@@ -31,42 +31,45 @@ const ResumeList = () => {
   };
 
   return (
-    <div className="snapskill-resume-list-container">
-      <div className="snapskill-resume-list-header">
-        <RoundedSquareIcon />
-        <Profile />
-      </div>
-      <div className="snapskill-resume-list">
-        <Card className="max-w-sm">
-          <div className="text-gray-900 flex justify-center">
-            <IoMdAdd
-              size={35}
-              className="cursor-pointer"
-              onClick={handleCreateNewResume}
-            />
-          </div>
-          <h6 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Create New Resume
-          </h6>
-        </Card>
-        {DUMMY_DATA.map((resume) => (
-          <Card
-            key={resume.id}
-            className="max-w-sm cursor-pointer"
-            imgAlt="Meaningful alt text for an image that is not purely decorative"
-            imgSrc="https://picsum.photos/280/"
-            onClick={() => handleResumeClick(resume)}
-          >
-            <h6 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {resume.title}
+    <>
+      <div className="snapskill-resume-list-container">
+        <div className="snapskill-resume-list-header">
+          <RoundedSquareIcon />
+          <Profile />
+        </div>
+        <div className="snapskill-resume-list">
+          <Card style={{ flexBasis: "22%" }}>
+            <div className="text-gray-900 flex justify-center">
+              <IoMdAdd
+                size={35}
+                className="cursor-pointer"
+                onClick={handleCreateNewResume}
+              />
+            </div>
+            <h6 className="text-xl text-center font-bold tracking-tight text-gray-900 dark:text-white">
+              Create New Resume
             </h6>
           </Card>
-        ))}
+          {DUMMY_DATA.map((resume) => (
+            <Card
+              key={resume.id}
+              className="cursor-pointer"
+              imgAlt="Meaningful alt text for an image that is not purely decorative"
+              imgSrc="https://picsum.photos/280/"
+              style={{ flexBasis: "22%" }}
+              onClick={() => handleResumeClick(resume)}
+            >
+              <h6 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {resume.title}
+              </h6>
+            </Card>
+          ))}
+        </div>
       </div>
       {isCreateNew && (
         <CreateNewResumeModal isCreate={isCreateNew} setCreate={setCreateNew} />
       )}
-    </div>
+    </>
   );
 };
 
