@@ -77,8 +77,8 @@ const forgotPassword = async (req, res) => {
     // Generate a token
     const token = crypto.randomBytes(20).toString("hex");
 
-    // Set token expiration (e.g., 1 hour)
-    const tokenExpiry = Date.now() + 3600000; // 1 hour
+    // Set token expiration (e.g., 30 minutes)
+    const tokenExpiry = Date.now() + 1800000; // 30 minutes
 
     // Save token and token expiry in the user record
     user.reset_password_token = token;
@@ -89,15 +89,15 @@ const forgotPassword = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "your-email@gmail.com", // Replace with your email
-        pass: "your-email-password", // Replace with your email password
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
       },
     });
 
-    const resetLink = `http://yourdomain.com/reset-password/${token}`;
+    const resetLink = `http://localhost:5173/reset-password/${token}`;
 
     await transporter.sendMail({
-      from: '"Your App" <your-email@gmail.com>',
+      from: process.env.EMAIL,
       to: user.email,
       subject: "Password Reset Request",
       text: `You requested a password reset. Click the link below to reset your password:\n\n${resetLink}`,
@@ -125,7 +125,7 @@ const resetPassword = async (req, res) => {
     }
 
     // Hash the new password
-    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update the password and clear the token and expiry
     user.password = hashedPassword;
