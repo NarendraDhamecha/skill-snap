@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import TopBar from "./TopBar";
+import { MdZoomIn, MdZoomOut } from "react-icons/md";
+import { IoMdDownload, IoMdLink } from "react-icons/io";
 
 const ResumeMiddle = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -72,43 +74,31 @@ const ResumeMiddle = () => {
           }}
           onMouseDown={handleMouseDown}
         ></div>
-
-        {/* Zoom controls */}
         <div
           style={{
             position: "absolute",
             bottom: "3%",
             left: "40%",
             display: "flex",
-            gap: "10px",
+            gap: "20px",
+            background: "rgb(38, 38, 38)",
+            padding: "5px 10px 5px 10px",
+            borderRadius: "22px",
+            opacity: "0.7",
           }}
         >
-          <button
+          <MdZoomIn
+            size={25}
+            className="cursor-pointer"
             onClick={handleZoomIn}
-            style={{
-              padding: "10px 20px",
-              background: "#4CAF50",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Zoom In
-          </button>
-          <button
+          />
+          <MdZoomOut
+            size={25}
+            className="cursor-pointer"
             onClick={handleZoomOut}
-            style={{
-              padding: "10px 20px",
-              background: "#f44336",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Zoom Out
-          </button>
+          />
+          <IoMdLink size={25} className="cursor-pointer" />
+          <IoMdDownload size={25} className="cursor-pointer" />
         </div>
       </div>
     </div>
