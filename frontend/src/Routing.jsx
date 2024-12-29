@@ -40,7 +40,11 @@ const Routing = () => {
 
   const verifyToken = (response, error) => {
     if (error) {
-      toast.error(error?.message || "");
+      let errorMsg = error?.message || "";
+      if (error?.message === "jwt expired") {
+        errorMsg = "Session expired";
+      }
+      toast.error(errorMsg);
       localStorage.removeItem("token");
       return;
     }

@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { Modal, Button, TextInput, Label, Checkbox } from "flowbite-react";
-import axiosInstance from "../api/axiosInstance";
+import {
+  Modal,
+  Button,
+  TextInput,
+  Label,
+  Checkbox,
+  Spinner,
+} from "flowbite-react";
 import { generateUniqueSlug } from "../utils/_helpers";
 import { toast } from "react-toastify";
+import { ENDPOINTS } from "../constant/_constant";
+import usePostRequest from "../hooks/usePostRequest";
 
 const CreateNewResumeModal = ({ isCreate, setCreate, fetchData }) => {
   const [resumeData, setResumeData] = useState({
@@ -11,6 +19,8 @@ const CreateNewResumeModal = ({ isCreate, setCreate, fetchData }) => {
     sections: [],
     isPublic: false,
   });
+
+  const { postData, isLoading } = usePostRequest(ENDPOINTS.POST_RESUME);
 
   const handleChange = (event) => {
     const label = event.target.name;
@@ -30,14 +40,17 @@ const CreateNewResumeModal = ({ isCreate, setCreate, fetchData }) => {
     setCreate(false);
   };
 
-  const handleCreate = async () => {
-    try {
-      await axiosInstance.post("/create-resume", resumeData);
-      handleClose();
-      fetchData();
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+  const onSuccess = (response) => {
+    handleClose();
+    fetchData();
+  };
+
+  const onError = (error) => {
+    toast.error(error.message);
+  };
+
+  const handleCreate = () => {
+    postData(resumeData, onSuccess, onError);
   };
 
   return (
@@ -95,8 +108,9 @@ const CreateNewResumeModal = ({ isCreate, setCreate, fetchData }) => {
         <Button
           onClick={handleCreate}
           className="bg-blue-600 text-white hover:bg-blue-500"
+          disabled={isLoading}
         >
-          Create Resume
+          {isLoading ? <Spinner /> : "Create"}
         </Button>
       </Modal.Footer>
     </Modal>

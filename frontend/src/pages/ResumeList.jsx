@@ -9,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { removeSpaces } from "../utils/_helpers";
 import useGetRequest from "../hooks/useGetRequest";
 import ResumeListSkeleton from "../skeletons/ResumeListSkeleton";
+import { ENDPOINTS } from "../constant/_constant";
 
 const ResumeList = () => {
   const [isCreateNew, setCreateNew] = useState(false);
   const navigate = useNavigate();
 
-  const { data: resumes, isLoading, fetchData } = useGetRequest("/getresumes");
+  const { data: resumes, isLoading, fetchData } = useGetRequest(ENDPOINTS.GET_RESUMES);
 
   const handleCreateNewResume = () => {
     setCreateNew((prev) => !prev);

@@ -112,3 +112,10 @@
 //     icon: <IoMdSettings size={20} />,
 //   },
 // ];
+
+export const ENDPOINTS = {
+  LOGIN: "/login",
+  REGISTER: "/register",
+  GET_RESUMES: "/getresumes",
+  POST_RESUME: "/create-resume",
+};

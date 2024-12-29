@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Card, Label, TextInput, Button } from "flowbite-react";
-import axiosInstance from "../api/axiosInstance";
+import { Card, Label, TextInput, Button, Spinner } from "flowbite-react";
+import usePostRequest from "../hooks/usePostRequest";
+import { toast } from "react-toastify";
+import { ENDPOINTS } from "../constant/_constant";
+import { login } from "../redux/authReducer";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const [signUpData, setSignUpData] = useState({
@@ -10,24 +14,31 @@ const SignUp = () => {
     password: "",
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { postData, isLoading } = usePostRequest(ENDPOINTS.REGISTER);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const onSuccess = (response) => {
+    dispatch(login(response));
+    navigate("/dashboard");
+    toast.success(response?.message);
+  };
+
+  const onError = (error) => {
+    toast.error(error.message);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await axiosInstance.post("/register", signUpData);
-      navigate("/login");
-    } catch (error) {
-      alert(JSON.stringify(error));
-    }
+    postData(signUpData, onSuccess, onError);
   };
 
   return (
-    <div className="flex justify-center items-center" style={{height: '80%'}}>
+    <div className="flex justify-center items-center" style={{ height: "80%" }}>
       <Card className="w-full max-w-md p-4">
         <h2 className="text-xl font-bold text-center mb-4">
           Sign Up for Snap Skill
@@ -70,7 +81,7 @@ const SignUp = () => {
             />
           </div>
           <Button type="submit" className="w-full" gradientDuoTone="cyanToBlue">
-            Sign Up
+            {isLoading ? <Spinner /> : "Sign Up"}
           </Button>
           <div className="text-right">
             <NavLink

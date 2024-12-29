@@ -1,30 +1,37 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance";
 import { login } from "../redux/authReducer";
 import { useDispatch } from "react-redux";
-import { Card, Button, Label, TextInput } from "flowbite-react";
+import { Card, Button, Label, TextInput, Spinner } from "flowbite-react";
+import usePostRequest from "../hooks/usePostRequest";
+import { toast } from "react-toastify";
+import PasswordInput from "../components/PasswordInput";
+import { ENDPOINTS } from "../constant/_constant";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { postData, isLoading } = usePostRequest(ENDPOINTS.LOGIN);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSuccess = (response) => {
+    dispatch(login(response));
+    navigate("/dashboard");
+  };
 
-    try {
-      const response = await axiosInstance.post("/login", loginData);
-      dispatch(login(response.data));
-      navigate("/dashboard");
-    } catch (error) {
-      
-    }
+  const onError = (error) => {
+    toast.error(error.message);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postData(loginData, onSuccess, onError);
   };
 
   return (
@@ -46,20 +53,14 @@ const Login = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <Label htmlFor="password" value="Password" />
-            <TextInput
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Enter your password"
-              required
-              value={loginData.password}
-              onChange={handleChange}
-            />
-          </div>
-          <Button type="submit" className="w-full" gradientDuoTone="cyanToBlue">
-            Log In
+          <PasswordInput value={loginData.password} onChange={handleChange} />
+          <Button
+            type="submit"
+            className="w-full"
+            gradientDuoTone="cyanToBlue"
+            disabled={isLoading}
+          >
+            {isLoading ? <Spinner size="sm" /> : "Log In"}
           </Button>
           <div className="text-right">
             <NavLink
