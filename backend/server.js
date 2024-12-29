@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
-const sequelize = require("./_db");
+const sequelize = require("./utils/_db");
 const authRoutes = require("./routes/authRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
 const ensureAuth = require("./middleware/ensureAuth");
@@ -22,7 +22,10 @@ app.use(
 app.use(express.json());
 
 app.get("/skillsnap/verify-user", ensureAuth, (req, res) => {
-  res.json({ msg: "User is authenticated", user: req.user });
+  res.json({
+    msg: "User is authenticated",
+    user: { name: req.user.name, email: req.user.email },
+  });
 });
 
 app.use("/skillsnap", authRoutes);

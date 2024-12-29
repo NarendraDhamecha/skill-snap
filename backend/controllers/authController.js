@@ -10,13 +10,13 @@ const registerUser = async (req, res) => {
   if (!name || !email || !password) {
     return res
       .status(400)
-      .json({ msg: "name, email and password is required" });
+      .json({ message: "name, email and password is required" });
   }
 
   if (password.length < 6) {
     return res
       .status(400)
-      .json({ msg: "password length should be at least 6" });
+      .json({ message: "password length should be at least 6" });
   }
 
   try {
@@ -26,13 +26,29 @@ const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     };
+
     const newUser = await User.create(user);
-    return res
-      .status(201)
-      .json({ msg: "User created successfully", data: newUser });
+
+    const token = jwt.sign(
+      { id: newUser.id, email: newUser.email },
+      process.env.SECRET_KEY,
+      { expiresIn: "1h" }
+    );
+
+    const responseUser = {
+      name: newUser?.name,
+      userName: newUser?.email?.split("@")[0],
+    };
+
+    return res.json({
+      message: "User created successfully",
+      token,
+      user: responseUser,
+    });
   } catch (error) {
-    console.log("Getting error while creating user", error);
-    return res.status(400).json({ msg: "error", error });
+    return res
+      .status(400)
+      .json({ message: "Getting error while creating user", error });
   }
 };
 
@@ -42,7 +58,7 @@ const authenticateUser = async (req, res) => {
     const user = await User.findOne({ where: { email: email } });
 
     if (!user) {
-      return res.status(404).json({ msg: "User not found" });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user?.password);
@@ -54,12 +70,21 @@ const authenticateUser = async (req, res) => {
         { expiresIn: "1h" }
       );
 
-      return res.json({ msg: "Authentication successful", token, user });
+      const responseUser = {
+        name: user?.name,
+        userName: user?.email?.split("@")[0],
+      };
+
+      return res.json({
+        message: "Authentication successful",
+        token,
+        user: responseUser,
+      });
     } else {
-      return res.status(401).json({ msg: "Invalid password" });
+      return res.status(401).json({ message: "Invalid password" });
     }
   } catch (err) {
-    return res.status(400).json({ msg: "Error authenticating user", err });
+    return res.status(400).json({ message: "Error authenticating user", err });
   }
 };
 
