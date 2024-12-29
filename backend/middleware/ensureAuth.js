@@ -14,15 +14,10 @@ const ensureAuth = async (req, res, next) => {
   }
 
   try {
-    let decodedData;
-    jwt.verify(extractedToken, process.env.SECRET_KEY, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ message: "Invalid or expired token." });
-      }
-
-      decodedData = decoded;
-    });
-
+    const decodedData = await jwt.verify(
+      extractedToken,
+      process.env.SECRET_KEY
+    );
     const user = await User.findByPk(decodedData.id);
     req.user = user;
     next();
