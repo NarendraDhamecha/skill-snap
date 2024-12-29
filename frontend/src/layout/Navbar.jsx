@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const CustomNavbar = () => {
   return (
-    <Navbar fluid rounded border>
+    <Navbar fluid rounded border className="from-cyan-500 bg-gradient-to-r">
       <Navbar.Brand href="/skillsnap/home">
         <span className="text-xl font-semibold">Snap Skill</span>
       </Navbar.Brand>

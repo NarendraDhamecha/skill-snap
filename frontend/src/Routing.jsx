@@ -7,14 +7,17 @@ import SignUp from "./pages/SignUp";
 import ForgotPassword from "./pages/ForgotPassword";
 // import CreateResume from "./pages/CreateResume";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { login } from "./redux/authReducer";
 import NonAuthBaseRoute from "./NonAuthBaseRoute";
-// import AuthBaseRoute from "./AuthBaseRoute";
+import AuthBaseRoute from "./AuthBaseRoute";
 import ResumeList from "./pages/ResumeList";
-import axiosInstance from "./api/axiosInstance";
+// import axiosInstance from "./api/axiosInstance";
 import CreateResume from "./pages/CreateResume";
 import ResetPassword from "./pages/ResetPassword";
+import NotFound from "./NotFound";
+import useGetRequest from "./hooks/useGetRequest";
+import { toast } from "react-toastify";
 
 // authentication function
 const isAuthenticated = () => {
@@ -33,59 +36,49 @@ const NonPrivateRoute = ({ children }) => {
 
 const Routing = () => {
   const dispatch = useDispatch();
+  const isAuth = isAuthenticated();
 
-  const verifyToken = async () => {
-    if (isAuthenticated()) {
-      try {
-        const response = await axiosInstance.get("/verify-user");
-        dispatch(
-          login({
-            token: localStorage.getItem("token"),
-            user: response.data.user,
-          })
-        );
-      } catch (error) {
-        localStorage.removeItem("token");
-      }
+  const verifyToken = (response, error) => {
+    if (error) {
+      toast.error(error?.message || "");
+      localStorage.removeItem("token");
+      return;
     }
+
+    dispatch(
+      login({
+        token: localStorage.getItem("token"),
+        user: response.user,
+      })
+    );
   };
 
-  useEffect(() => {
-    if (isAuthenticated()) {
-      verifyToken();
-    }
-  }, []);
+  useGetRequest("/verify-user", isAuth, verifyToken);
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <NonPrivateRoute>
-            <NonAuthBaseRoute />
-          </NonPrivateRoute>
-        }
-      >
+      <Route path="/" element={<NonAuthBaseRoute />}>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<SignUp />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="home" element={<Home />} />
         <Route path="resume-templates" element={<ResumeTemplates />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Route>
-      <Route path="/:username/:slug/build" element={<CreateResume />} />
-      <Route path="/dashboard" element={<ResumeList />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />} />
-      {/* <Route
-        path="/skillsnap/auth"
+
+      {/* Protected routes */}
+      <Route
+        path="/"
         element={
           <PrivateRoute>
             <AuthBaseRoute />
           </PrivateRoute>
         }
       >
-        <Route path="create-resume" element={<ResumeList />} />
-      </Route> */}
-      <Route path="*" element={<h1>Not found</h1>} />
+        <Route path="/:username/:slug/build" element={<CreateResume />} />
+        <Route path="/dashboard" element={<ResumeList />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

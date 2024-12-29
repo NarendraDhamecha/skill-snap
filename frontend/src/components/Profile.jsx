@@ -9,6 +9,14 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  let placeholderInitials = "";
+  if (fullName?.length > 0) {
+    const userName = fullName?.split(" ");
+    if (userName?.length > 1) {
+      placeholderInitials = `${userName[0][0]}${userName[1][0]}`;
+    }
+  }
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
@@ -22,7 +30,7 @@ const Profile = () => {
         <Avatar
           alt="Profile Picture"
           rounded
-          placeholderInitials="ND"
+          placeholderInitials={placeholderInitials}
           className="cursor-pointer"
         />
       }

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Modal, Button, TextInput, Label, Checkbox } from "flowbite-react";
 import axiosInstance from "../api/axiosInstance";
 import { generateUniqueSlug } from "../utils/_helpers";
+import { toast } from "react-toastify";
 
-const CreateNewResumeModal = ({ isCreate, setCreate }) => {
+const CreateNewResumeModal = ({ isCreate, setCreate, fetchData }) => {
   const [resumeData, setResumeData] = useState({
     name: "",
     slug: "",
@@ -30,8 +31,13 @@ const CreateNewResumeModal = ({ isCreate, setCreate }) => {
   };
 
   const handleCreate = async () => {
-    await axiosInstance.post("/create-resume", resumeData);
-    handleClose();
+    try {
+      await axiosInstance.post("/create-resume", resumeData);
+      handleClose();
+      fetchData();
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (

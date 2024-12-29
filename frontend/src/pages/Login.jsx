@@ -23,7 +23,7 @@ const Login = () => {
       dispatch(login(response.data));
       navigate("/dashboard");
     } catch (error) {
-      alert(JSON.stringify(error));
+      
     }
   };
 
