@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASEURL = "https://skill-snap.onrender.com";
+const BASEURL = "https://skill-snap.onrender.com/skillsnap";
 
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
