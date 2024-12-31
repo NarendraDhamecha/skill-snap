@@ -15,8 +15,7 @@ dotenv.config();
 //cors route
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://skill-snap-1.onrender.com"], 
-    credentials: true
+    origin: ["http://localhost:3000", "https://skill-snap-1.onrender.com"],
   })
 );
 
